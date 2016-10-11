@@ -1,0 +1,63 @@
+html{
+	background-color: #0E5C74;
+}
+body{position: relative;
+	
+}
+#logo{padding: 7px 10px 10px 10px;
+	color: white;
+	border: 2px solid white;
+	border-radius:50%;
+	background-color: black;
+	display:inline-block;
+	margin-top:-2px;
+	text-shadow: 1px 1px blue;
+	font-size: 24px;
+	cursor:pointer;
+}
+
+footer{position:absolute;
+		bottom:0;
+		width:100%;
+		background-color:#1C456E;
+		height: 30px;
+		color:white;
+		text-align:center;
+		font-size:13px;
+		border:1px solid rgba(255,255,255,0.2);
+		border-radius:4px;
+	
+}
+
+#myForm{margin-top: 20px;
+	line-height: 30px;
+	color:white;
+	background-color:#1C456E;
+	border:1px solid rgba(255,255,255,0.2);
+	border-radius:4px;
+	height:280px;
+	width: 200px;
+	float:right;
+	text-align:center;
+	
+}
+a{color:white;	
+}
+.abc{
+	background-color:gray;
+	color:white;
+	text-align:center;
+	font-weight:bold;
+}
+#signupFormDiv{color:white;
+margin-top:10px;
+margin-left:15%;
+line-height: 35px;
+height: 460px;
+
+
+	
+	
+}
+	
+

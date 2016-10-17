@@ -17,10 +17,11 @@ function signup(){
     req.onreadystatechange = function() {
 	    if(req.readyState == 4 && req.status == 200) {
 			if(req.responseText !=1){
-				alert('There is already an account with that email address');	
+				alert('There is already an account with that email address');
+					
 			}
 			else{
-				document.getElementById("signupForm").innerHTML="Account created. Click <a href='http://localhost:8080/ShippingWebsite'>here</a> to log in.";	
+				document.getElementById("signupForm").innerHTML="Account created. Click <a href='http://localhost:8080/SmartShippingService'>here</a> to log in.";	
 			}
 	    }
     }

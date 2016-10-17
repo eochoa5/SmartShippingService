@@ -1,6 +1,7 @@
 <?php
 if(isset($_POST["firstname"])){
 	include_once("database/connect.php");
+	include_once("database/hash.php");
 	
 	$first=mysqli_real_escape_string($db_conx,$_POST["firstname"]);
 	$last=mysqli_real_escape_string($db_conx,$_POST["lastname"]);
@@ -8,6 +9,7 @@ if(isset($_POST["firstname"])){
 	$address=mysqli_real_escape_string($db_conx,$_POST["address"]);
 	$password=mysqli_real_escape_string($db_conx,$_POST["password"]);
 	$phone=mysqli_real_escape_string($db_conx,$_POST["phone"]);
+	$password= cryptPass($password);
 	
 	$sql = "INSERT INTO users (id, first, last, email, password, address, phone, sign_up_date)       
 		        VALUES('','$first','$last','$email','$password','$address','$phone',now())";

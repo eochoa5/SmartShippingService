@@ -1,6 +1,8 @@
 <?php
 $registration = false;
 
+/* Miguel Test*/
+
 if(isset($_POST["first"])){
 	include_once("../database/connect.php");
 	include_once("../database/hash.php");

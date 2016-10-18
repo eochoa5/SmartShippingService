@@ -1,7 +1,7 @@
 <?php
 $registration = false;
 
-/* Miguel Test*/
+/* fix that css man*/
 
 if(isset($_POST["first"])){
 	include_once("../database/connect.php");

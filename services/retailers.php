@@ -1,8 +1,6 @@
 <?php
 $registration = false;
 
-/* fix that css man*/
-
 if(isset($_POST["first"])){
 	include_once("../database/connect.php");
 	include_once("../database/hash.php");
@@ -46,12 +44,11 @@ if(isset($_POST["first"])){
 	?>
 </div>
 
-<h2>Retailer Signup Form</h2>
-<h3>Retailers may opt-in to one of our plans to receive discounted shipping rates as well as seasonal promotions. Fill out the short form below so that we can apply discounted shipping on all of your future shipments.</h3>
-
+<div class="abc" style="margin-top:10px; font-size:18px; text-shadow: 1px 1px black;">
+Retailers may opt-in to one of our plans to receive discounted shipping rates as well as seasonal promotions.<br>
+ Fill out the short form below so that we can apply discounted shipping on all of your future shipments.
+</div
 <form id="retailersignupForm" name="retailersignupForm" method="post" action="retailers.php">
-
-
 
 <div id="signupFormDiv">
  
@@ -84,7 +81,7 @@ if(isset($_POST["first"])){
 	<label><b>Phone Number</b></label><br>
     <input id="phone" type="text" placeholder="Phone Number" name="phone" required maxlength="15"><br>
         
-    <input type="submit">
+    <input type="submit" style="margin-top: 13px">
 </div>
   
 </form>

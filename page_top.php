@@ -89,5 +89,8 @@
                 </div>
             </div>
         </li>
+		<li class="no-sub">
+            <a class="top-heading" href="http://localhost:8080/SmartShippingService/login.php">Log in</a>
+        </li>
     </ul>
 </nav>

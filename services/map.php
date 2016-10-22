@@ -1,5 +1,4 @@
 <?php session_start();
-
 if(isset($_POST["shipid"])){
 	include_once("../database/connect.php");
 	$shipid=mysqli_real_escape_string($db_conx,$_POST["shipid"]);
@@ -11,17 +10,8 @@ if(isset($_POST["shipid"])){
 		 $row=mysqli_fetch_assoc($query);
 		 $_SESSION['address'] = $row["address"];
 		 $_SESSION['dest']= $row["destAddress"];
-		$geo = file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?address='.urlencode($row["curLoc"]).'&sensor=false');
-		$geo = json_decode($geo, true);
-
-		if ($geo['status'] == 'OK') {
-		  $latitude = $geo['results'][0]['geometry']['location']['lat'];
-		  $longitude = $geo['results'][0]['geometry']['location']['lng'];
-		  $_SESSION['lat']=$latitude;
-		  $_SESSION['long']= $longitude; 
-		  $_SESSION['sender']= $row["first"] . " " . $row["last"] ;
-		  
-		}
+		 $_SESSION['shipid']= $shipid;
+		
 	 
 	 }
 	 else{
@@ -29,12 +19,36 @@ if(isset($_POST["shipid"])){
 			 $_SESSION = array();
 			 session_destroy();
 			 
-		 }
-		 
+		 }	 
 		 
 	 } 
 }
-if(!isset($_SESSION['address']) && !isset($_SESSION['dest']) && !isset($_SESSION['lat']) && !isset($_SESSION['long'])){
+
+if(isset($_POST["loc"])) {
+	
+	include("../database/connect.php");
+	$shipID= $_SESSION['shipid'];
+	$sql = "SELECT * FROM shipments WHERE shipmentID='$shipID'";
+	$query = mysqli_query($db_conx, $sql);
+	$row=mysqli_fetch_assoc($query);
+	
+	$geo = file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?address='.urlencode($row["curLoc"]).'&sensor=false');
+		$geo = json_decode($geo, true);
+
+		if ($geo['status'] == 'OK') {
+		  $latitude = $geo['results'][0]['geometry']['location']['lat'];
+		  $longitude = $geo['results'][0]['geometry']['location']['lng'];  
+		  
+		}
+		
+	
+	 echo $latitude . ' ' . $longitude;
+	 exit();
+	
+}
+
+
+if(!isset($_SESSION['address']) && !isset($_SESSION['dest'])){
 	header("location: http://localhost:8080/SmartShippingService/Services/realTimeTracking.php");
 	exit();
 	
@@ -71,6 +85,27 @@ if(!isset($_SESSION['address']) && !isset($_SESSION['dest']) && !isset($_SESSION
       }
 	 
     </style>
+	
+	<script>
+	function placeMarker(myMarker){ 
+		var x="";
+		var req = new XMLHttpRequest();
+		req.open("POST", "", true);
+		req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		req.onreadystatechange = function() {
+			if(req.readyState == 4 && req.status == 200) {
+				var result = req.responseText.split(" ");
+				var lat= parseFloat(result[0]);
+				var lon= parseFloat(result[1]);
+				var latlng = new google.maps.LatLng(lat, lon);
+				myMarker.setPosition(latlng);
+				setTimeout(placeMarker(myMarker), 20000);
+			}
+		}
+	
+		req.send("loc="+x); 					
+	}
+	</script>
   </head>
   <body>
     <div id="floating-panel">
@@ -92,23 +127,22 @@ if(!isset($_SESSION['address']) && !isset($_SESSION['dest']) && !isset($_SESSION
           zoom: 7,
           center: {lat: 41.85, lng: -87.65}
         });
-			/////marker	 
-			var image ="images/box.png";
-			
-			var myLatLng= {lat: <?php echo  $_SESSION['lat'];  ?>, lng: <?php echo  $_SESSION['long'];  ?>};
-				
-		var marker = new google.maps.Marker({
-          position: myLatLng,
-          map: map,
-          title: 'Your Package is here!',
-		  icon: image
-        });
-		marker.setOptions({'opacity': 0.7});
 		
-		/////
+			var image ="images/box.png";
+			var myLatLng= {lat: 41.85, lng: -87.65};
+			var marker = new google.maps.Marker({
+			position: myLatLng,
+			map: map,
+			title: 'Your Package is here!',
+			icon: image
+			});
+			marker.setOptions({'opacity': 0.7});
+			
+		placeMarker(marker); 
         directionsDisplay.setMap(map);
 		
-		
+		 
+	
         var onLoadHandler = function() {
           calculateAndDisplayRoute(directionsService, directionsDisplay);
         };

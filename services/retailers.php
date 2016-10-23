@@ -47,7 +47,7 @@ if(isset($_POST["first"])){
 <div class="abc" style="margin-top:10px; font-size:18px; text-shadow: 1px 1px black;">
 Retailers may opt-in to one of our plans to receive discounted shipping rates as well as seasonal promotions.<br>
  Fill out the short form below so that we can apply discounted shipping on all of your future shipments.
-</div
+</div>
 <form id="retailersignupForm" name="retailersignupForm" method="post" action="retailers.php">
 
 <div id="signupFormDiv">

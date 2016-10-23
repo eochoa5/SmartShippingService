@@ -8,7 +8,7 @@
 	</head>
 <body>
 <?php include_once("../page_top.php"); ?>
-<form id="signupForm" name="signupform" onsubmit="return false;">
+<form id="signupForm" name="signupform" action="tracker.php" method="post">
 <div class="abc" style="margin-top:10px">Enter the information below to track your shipment</div>
  <div id="signupFormDiv">
     <label><b>First</b></label><br>
@@ -19,7 +19,7 @@
     <input id="email" type="text" placeholder="Email" name="email" required maxlength="50"><br>
 	<label><b>Shipment ID</b></label><br>
     <input id="Shipid" type="text" placeholder="Shipment ID" name="shipid" required maxlength="20" size="40"><br/>      
-    <button style="margin-top: 13px" id="signupbtn" onclick="">Track</button><br><br>
+    <button style="margin-top: 13px" type="submit">Track</button><br><br>
 </div>
   
 </form>

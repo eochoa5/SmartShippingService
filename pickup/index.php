@@ -31,6 +31,9 @@ if(isset($_POST["first"])){
 		<title> Schedule up a pick up</title>
 	</head>
 <body>
+
+
+
 <?php include_once("../page_top.php"); ?>
 <form id="signupForm" name="signupform" onsubmit="return false;">
 <div class="abc" style="margin-top:10px">Please fill out the information below</div>

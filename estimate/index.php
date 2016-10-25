@@ -1,56 +1,137 @@
 <html>
-	<head>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" type="text/css" href="../stylesheets/style.css">
-		<link href="../stylesheets/ddmenu.css" rel="stylesheet" type="text/css" />
-		<script src="../js/ddmenu.js" type="text/javascript"></script>
-		<title> Estimate</title>
-	</head>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../stylesheets/style.css">
+    <link href="../stylesheets/ddmenu.css" rel="stylesheet" type="text/css"/>
+    <script src="../js/ddmenu.js" type="text/javascript"></script>
+    <script src="jquery-3.1.1.min.js" type="text/javascript"></script>
+</head>
 <body>
+
 <?php include_once("../page_top.php"); ?>
-<form id="signupForm" name="signupform" onsubmit="return false;">
-<div class="abc" style="margin-top:10px">Please fill out the information below to get your estimate</div>
- <div id="signupFormDiv">
-    <label><b>Choose delivery option</b></label><br>
-    <select>
-  <option value="7 day ground economy shipping">7 day ground economy shipping</option>
-  <option value="Next day air expedited shipping">Next day air expedited shipping</option>
-  <option value="2 day air expedited shipping">2 day air expedited shipping</option>
-  <option value="4 day ground shipping">4 day ground shipping</option>
-  <option value="International air economy shipping">International air economy shipping</option>
-  <option value="International air expedited 2 day shipping">International air expedited 2 day shipping</option>
-  <option value="International air 4 day shipping">International air 4 day shipping</option>
-</select><br>
-    <label><b>Your Address/store address</b></label><br>
-    <input id="address" type="text" placeholder="Street Address" name="address" required maxlength="120" size="40">
-	<select name="country" id="country">
-      <?php include_once("../country_list.php"); ?>
-    </select>
-	 <input id="state" type="text" placeholder="State" name="state" required maxlength="4">
-	  <input id="zip" type="text" placeholder="Zip code" name="zip" required maxlength="9">
-	<br>
-	<label><b>Destination Address</b></label><br>
-    <input id="address2" type="text" placeholder="Street Address" name="address" required maxlength="120" size="40">
-	<select name="country" id="country2">
-      <?php include("../country_list.php"); ?>
-    </select>
-	 <input id="state2" type="text" placeholder="State" name="state" required maxlength="4">
-	  <input id="zip2" type="text" placeholder="Zip code" name="zip" required maxlength="9">
-	<br>
-	<label><b>Shipment weight </b></label><br>
-    <input id="weight" type="text" placeholder="Weight" name="weight" required maxlength="20"><br>
-	<label><b>Insurance</b></label><br>
-     <input type="radio" name="insurance" value="yes"> Yes
-  <input type="radio" name="insurance" value="no"> No<br>
-        
-    <button style="margin-top: 13px" id="signupbtn" onclick="">Get Estimate</button><br><br>
+<div id="formDiv">
+    <form id="signupForm" name="signupform" onsubmit="index.php">
+        <div id="signupFormDiv">
+            <div class="abc" style="margin-top:10px">Please fill out the information below to get an estimate.</div>
+            <label><b>Origin Zip Code:</b></label><br>
+            <input id="org" type="text" placeholder="Zip Code" name="origin" required maxlength="30"><br>
+
+            <label><b>Destination Zip Code:</b></label><br>
+            <input id="dest" type="text" placeholder="Zip Code" name="destination" required maxlength="30"><br>
+
+            <label><b>Shape:</b></label><br>
+            <input id='boxShape' type="radio" name="shape" value="box" checked>Box<br>
+            <input id='envShape' type="radio" name="shape" value="envelope">Envelope<br>
+
+            <label><b>Box Length:(inches)</b></label><br>
+            <input cusAtt="boxSpecific" type="text" placeholder="Length" id="x" maxlength="30"><br>
+
+            <label><b>Box Width:(inches)</b></label><br>
+            <input cusAtt="boxSpecific" type="text" placeholder="Width" id="y" maxlength="30"><br>
+
+            <label><b>Box Height:(inches)</b></label><br>
+            <input cusAtt="boxSpecific" type="text" placeholder="Height" id="z" maxlength="30"><br>
+
+            <label><b>Box Weight:(pounds)</b></label><br>
+            <input cusAtt="boxSpecific" type="text" placeholder="Weight" id="w" maxlength="30"><br>
+
+            <button id='submit' type="button" style="margin-top: 13px">Submit</button>
+            <div id="results" class="abc" style="margin-top:10px"></div>
+        </div>
+
+    </form>
 </div>
-  
-</form>
 
 
+<script>
+    $(document).ready(function () {
+        //$('[cusAtt]').attr("disabled", "disabled");
+    });
+
+    $('input:radio[name="shape"]').change(
+        function () {
+            if ($(this).is(':checked') && $(this).val() == 'box') {
+                $('[cusAtt]').removeAttr("disabled");
+            }
+
+            if ($(this).is(':checked') && $(this).val() == 'envelope') {
+                $('[cusAtt]').attr("disabled", "disabled");
+            }
+        });
+
+    $("#submit").click(function () {
+
+        var debug = false;
+
+        var origin = $('#org').val();
+        var destination = $('#dest').val();
+        var volume = 1;
+        var distance = 0;
+        var weight = 0;
+
+        if (debug) {
+            origin = 90032;
+            destination = 10118;
+        }
+
+        distance = origin - destination;
+
+        if (distance < 0) {
+            distance = distance * -1;
+        }
+
+        distance = distance / 100;
+
+        if ($('#boxShape').is(':checked')) {
+            var x = $('#x').val();
+            var y = $('#y').val();
+            var z = $('#z').val();
+            var w = $('#w').val();
+
+            if (debug) {
+                x = 12;
+                y = 12;
+                z = 12;
+                w = 20;
+            }
+            volume = x * y * z;
+            volume = volume / 10;
+        }
+
+        var price = (distance * .13) + (volume * .05) + (weight * 0.6);
+        //price = parseFloat(Math.round(price * 100) / 100).toFixed(2);
+        var prettyPrice = parseFloat(Math.round(price * 100) / 100).toFixed(2);
+        console.log(prettyPrice);
+        $("#results").html("The total will be: $" + prettyPrice);
+        //https://www.zipcodeapi.com/rest/HIfVLZvjJzdjtoBNiOajHttxPsLsSqsA8HwTG1cqBqK5OmS7a3qSwUpmmaOeBgPJ/distance.json/90032/91030/mile
+    });
+
+    //not ready
+    function getBbyJson(queryURL) {
+        $(document).ready(function () {
+            $.ajax({
+                type: "GET",
+                url: queryURL,
+                crossDomain: true,
+                contentType: "application/json; charset=utf-8",
+
+                dataType: "jsonp",
+                success: function (data) {
+                    console.log(data);
+                }
+            });
+        });
+    }
+    //not ready
+    function getDistance(start, end) {
+        queryURL = "https://www.zipcodeapi.com/rest/HIfVLZvjJzdjtoBNiOajHttxPsLsSqsA8HwTG1cqBqK5OmS7a3qSwUpmmaOeBgPJ/distance.json/" + start + "/" + end + "/mile";
 
 
+        $.getJSONP(queryURL, function (data) {
+            console.log(data);
+        });
+    }
+</script>
 
 <?php include_once("../page_bottom.php"); ?>
 </body>

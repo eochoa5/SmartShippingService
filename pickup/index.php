@@ -1,27 +1,3 @@
-<?php
-if(isset($_POST["first"])){
-	include_once("../database/connect.php");
-	
-	$first=mysqli_real_escape_string($db_conx,$_POST["first"]);
-	$last=mysqli_real_escape_string($db_conx,$_POST["last"]);
-	$type=mysqli_real_escape_string("normal");
-	$email=mysqli_real_escape_string($db_conx,$_POST["email"]);
-	$phone=mysqli_real_escape_string($db_conx,$_POST["phone"]);
-	$time=mysqli_real_escape_string($db_conx,$_POST["address"]);
-	$deliveryType=mysqli_real_escape_string($db_conx,$_POST["deliveryType"]);
-	$weight=mysqli_real_escape_string($db_conx,$_POST["weight"]);
-	$insurance=mysqli_real_escape_string($db_conx,$_POST["insurance"]);
-	$pickedUp=mysqli_real_escape_string("No");
-	$address=mysqli_real_escape_string($db_conx,$_POST["insurance"]);
-	$destAddress=mysqli_real_escape_string($db_conx,$_POST["address2"]);
-	
-	$sql = "INSERT INTO pickups (id, pickupID, first, last, type, email, phone, time, deliveryType, weight, insurance, pickedUp, address, destAddress)       
-		        VALUES('', '','$first','$last','$type', '$email' , '$phone','$time', '$deliveryType', '$weight', '$insurance', '$pickedUp', '$address', '$destAddress')";
-	
-	$query = mysqli_query($db_conx, $sql);
-}
-
-?>
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,9 +7,6 @@ if(isset($_POST["first"])){
 		<title> Schedule up a pick up</title>
 	</head>
 <body>
-
-
-
 <?php include_once("../page_top.php"); ?>
 <form id="signupForm" name="signupform" onsubmit="return false;">
 <div class="abc" style="margin-top:10px">Please fill out the information below</div>

@@ -60,7 +60,7 @@ if(!isset($_SESSION['address']) && !isset($_SESSION['dest'])){
   <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
-    <title>Directions service</title>
+    <title>Live tracking tool</title>
     <style>
       html, body {
         height: 100%;
@@ -83,11 +83,26 @@ if(!isset($_SESSION['address']) && !isset($_SESSION['dest'])){
         line-height: 30px;
         padding-left: 10px;
       }
+	  #update{background-color:green;
+	  position:absolute;
+	  z-index:10;
+	  margin-left:250px;
+	  margin-top:10px;
+	  height:41px;
+	  color:white;
+	  cursor:pointer;
+	  
+		  
+	  }
+	  #update:hover{
+		  background-color:red;
+	  }
 	 
     </style>
 	
 	<script>
-	function placeMarker(myMarker){ 
+	var marker;
+	function placeMarker(){ 
 		var x="";
 		var req = new XMLHttpRequest();
 		req.open("POST", "", true);
@@ -97,9 +112,8 @@ if(!isset($_SESSION['address']) && !isset($_SESSION['dest'])){
 				var result = req.responseText.split(" ");
 				var lat= parseFloat(result[0]);
 				var lon= parseFloat(result[1]);
-				var latlng = new google.maps.LatLng(lat, lon);
-				myMarker.setPosition(latlng);
-				setTimeout(placeMarker(myMarker), 20000);
+					var latlng = new google.maps.LatLng(lat, lon);
+					marker.setPosition(latlng);	
 			}
 		}
 	
@@ -108,6 +122,7 @@ if(!isset($_SESSION['address']) && !isset($_SESSION['dest'])){
 	</script>
   </head>
   <body>
+  <button id="update" onclick="placeMarker()">Update</button>
     <div id="floating-panel">
     <b>Shipped from: </b>
     <select id="start">
@@ -130,15 +145,15 @@ if(!isset($_SESSION['address']) && !isset($_SESSION['dest'])){
 		
 			var image ="images/box.png";
 			var myLatLng= {lat: 41.85, lng: -87.65};
-			var marker = new google.maps.Marker({
+			marker = new google.maps.Marker({
 			position: myLatLng,
 			map: map,
 			title: 'Your Package is here!',
 			icon: image
 			});
-			marker.setOptions({'opacity': 0.7});
+			marker.setOptions({'opacity': 0.8});
 			
-		placeMarker(marker); 
+		placeMarker(); 
         directionsDisplay.setMap(map);
 		
 		 
@@ -146,6 +161,7 @@ if(!isset($_SESSION['address']) && !isset($_SESSION['dest'])){
         var onLoadHandler = function() {
           calculateAndDisplayRoute(directionsService, directionsDisplay);
         };
+		
        this.addEventListener('load', onLoadHandler);
       }
 		

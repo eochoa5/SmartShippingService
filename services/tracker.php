@@ -43,8 +43,13 @@ if(isset($_POST["shipid"])){
 		$diff = date_diff(date_create($NewDate),date_create(date("M j, Y")));
 		$_SESSION['percentage']=  ($diff->format('%R%a')/$total_time)*100;
 		$_SESSION['remaining']= (($total_time-$diff->format('%R%a')) <1) ? 0 : $total_time-$diff->format('%R%a');
+		
+		if($_SESSION['percentage']==100 || $_SESSION['remaining']==0){
+			$sql = "UPDATE shipments SET delivered='YES' WHERE shipmentID='$shipid'";
+			$query = mysqli_query($db_conx, $sql);
+		
+		}
 		 
-	 
 	 }
 	 else{
 		 if(isset($_SESSION['address1'])){

@@ -21,8 +21,7 @@
                         <li><h3>Order Tracking</h3></li>
                         <li><a href="http://localhost:8080/SmartShippingService/Services/trackShipment.php">Track Shipment</a></li>
 						<li><a href="http://localhost:8080/SmartShippingService/Services/realTimeTracking.php">Real-Time Tracking (new)</a></li>
-                        <li><a href="http://localhost:8080/SmartShippingService/Services/alerts.php">Set up Alerts (get text/email when shipment <br> 
-						arrives or reaches major checkpoints)</a></li>
+                        <li><a href="http://localhost:8080/SmartShippingService/Services/notifications.php">Set up notification when shipment arrives at destination<br> 
                     </ul>
                     <ul class="column mayHide">
                         <li><br /><img src="images/img1.png" /></li>

@@ -1,3 +1,24 @@
+<?php
+if(isset($_POST["first"])){
+	include_once("../database/connect.php");
+	
+	$first=mysqli_real_escape_string($db_conx,$_POST["first"]);
+	$last=mysqli_real_escape_string($db_conx,$_POST["last"]);
+	$email=mysqli_real_escape_string($db_conx,$_POST["email"]);
+	$phone=mysqli_real_escape_string($db_conx,$_POST["phone"]);
+	$deliveryType=mysqli_real_escape_string($db_conx,$_POST["deliveryType"]);
+	$weight=mysqli_real_escape_string($db_conx,$_POST["weight"]);
+	$insurance=mysqli_real_escape_string($db_conx,$_POST["insurance"]);
+	$address=mysqli_real_escape_string($db_conx,$_POST["address"]);
+	$address2=mysqli_real_escape_string($db_conx,$_POST["address2"]);
+	
+	$sql = "INSERT INTO pickups (id, first, last, type, email, phone, time, deliveryType, weight, insurance, pickedUp, adress,destAddress) VALUES('','$first','$last','Normal', '$email' , '$phone','2:00pm', '$deliveryType', '$weight', '$insurance', 'No', '$address', '$address2')";
+	$query = mysqli_query($db_conx, $sql); 
+	
+}
+?>
+
+
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +29,7 @@
 	</head>
 <body>
 <?php include_once("../page_top.php"); ?>
-<form id="signupForm" name="signupform" onsubmit="return false;">
+<form id="pickUpForm" name="normalPickupForm" method="post" action="index.php">
 <div class="abc" style="margin-top:10px">Please fill out the information below</div>
  <div id="signupFormDiv">
  <label><b>First</b></label><br>
@@ -24,7 +45,7 @@
 	<label><b>Phone Number</b></label><br>
     <input id="phone" type="text" placeholder="Phone Number" name="phone" required maxlength="15"><br>
     <label><b>Choose delivery option</b></label><br>
-    <select>
+    <select id="deliveryType" name="deliveryType">
   <option value="7 day ground economy shipping">7 day ground economy shipping</option>
   <option value="Next day air expedited shipping">Next day air expedited shipping</option>
   <option value="2 day air expedited shipping">2 day air expedited shipping</option>
@@ -42,18 +63,21 @@
 	  <input id="zip" type="text" placeholder="Zip code" name="zip" required maxlength="9">
 	<br>
 	<label><b>Destination Address</b></label><br>
-    <input id="address2" type="text" placeholder="Street Address" name="address" required maxlength="120" size="40">
-	<select name="country" id="country2">
+    <input id="address2" type="text" placeholder="Street Address" name="address2" required maxlength="120" size="40">
+	<select name="country2" id="country2">
       <?php include("../country_list.php"); ?>
     </select>
-	 <input id="state2" type="text" placeholder="State" name="state" required maxlength="4">
-	  <input id="zip2" type="text" placeholder="Zip code" name="zip" required maxlength="9">
+	 <input id="state2" type="text" placeholder="State" name="state2" required maxlength="4">
+	  <input id="zip2" type="text" placeholder="Zip code" name="zip2" required maxlength="9">
 	<br>
 	<label><b>Shipment weight </b></label><br>
     <input id="weight" type="text" placeholder="Weight" name="weight" required maxlength="20"><br>
 	<label><b>Insurance</b></label><br>
-     <input type="radio" name="insurance" value="yes"> Yes
-  <input type="radio" name="insurance" value="no"> No<br>
+	<select name="insurance" id="insurance">
+	<option value="yes">Yes</option>
+	<option value="no">No</option>
+	</select><br>
+    
         
     <button style="margin-top: 13px" id="signupbtn" onclick="">Schedule pick up</button><br><br>
 </div>

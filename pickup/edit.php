@@ -8,7 +8,7 @@ if(isset($_POST["first"])){
 	$email=mysqli_real_escape_string($db_conx,$_POST["email"]);
 	$id=mysqli_real_escape_string($db_conx,$_POST["id"]);
 	
-	$sql = "UPDATE pickups SET first='$first' last='$last' phone='$phone' email='$email' time='4:00pm' WHERE id='$id'";
+	$sql = "UPDATE pickups SET `first`='$first', `last`='$last', `phone`='$phone', `email`='$email', `time`='4:00pm' WHERE `id`=$id ";
 	$query = mysqli_query($db_conx, $sql); 
 	
 }
@@ -24,7 +24,7 @@ if(isset($_POST["first"])){
 	</head>
 <body>
 <?php include_once("../page_top.php"); ?>
-<form id="pickUpForm" name="normalPickupForm" method="post" action="edit.php">
+<form id="editForm" name="editForm" method="post" action="edit.php">
 <div class="abc" style="margin-top:10px">Please fill out the information below</div>
  <div id="signupFormDiv">
     <label><b>First</b></label><br>
@@ -41,8 +41,8 @@ if(isset($_POST["first"])){
 	<input type="date" name="dt"><br/>
 	<label><b>New time (leave blank if cancelling)</b></label><br>
 	<input type="time" name="tm"><br/> 
-    <button style="margin-top: 13px" id="signupbtn" onclick="">Reschedule</button><br>
-	<button style="margin-top: 13px" id="signupbtn" onclick="">Cancel</button><br>
+    <button style="margin-top: 13px" id="editbtn" onclick="">Reschedule</button><br>
+	<button style="margin-top: 13px" id="cancelbtn" onclick="">Cancel</button><br>
 </div>
   
 </form>

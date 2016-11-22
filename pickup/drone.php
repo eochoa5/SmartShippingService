@@ -45,7 +45,7 @@ if(isset($_POST["first"])){
 	<label><b>Phone Number</b></label><br>
     <input id="phone" type="text" placeholder="Phone Number" name="phone" required maxlength="15"><br>
     <label><b>Choose delivery option</b></label><br>
-    <select>
+    <select id="deliveryType" name="deliveryType">
   <option value="7 day ground economy shipping">7 day ground economy shipping</option>
   <option value="Next day air expedited shipping">Next day air expedited shipping</option>
   <option value="2 day air expedited shipping">2 day air expedited shipping</option>
@@ -53,7 +53,7 @@ if(isset($_POST["first"])){
   <option value="International air economy shipping">International air economy shipping</option>
   <option value="International air expedited 2 day shipping">International air expedited 2 day shipping</option>
   <option value="International air 4 day shipping">International air 4 day shipping</option>
-</select><br>
+	</select><br>
     <label><b>Your Address/store address</b></label><br>
     <input id="address" type="text" placeholder="Street Address" name="address" required maxlength="120" size="40">
 	<select name="country" id="country">
@@ -63,7 +63,7 @@ if(isset($_POST["first"])){
 	  <input id="zip" type="text" placeholder="Zip code" name="zip" required maxlength="9">
 	<br>
 	<label><b>Destination Address</b></label><br>
-    <input id="address2" type="text" placeholder="Street Address" name="address" required maxlength="120" size="40">
+    <input id="address2" type="text" placeholder="Street Address" name="address2" required maxlength="120" size="40">
 	<select name="country" id="country2">
       <?php include("../country_list.php"); ?>
     </select>

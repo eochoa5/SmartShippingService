@@ -12,7 +12,7 @@ if(isset($_POST["first"])){
 	$address=mysqli_real_escape_string($db_conx,$_POST["address"]);
 	$address2=mysqli_real_escape_string($db_conx,$_POST["address2"]);
 	
-	$sql = "INSERT INTO pickups (id, first, last, type, email, phone, time, deliveryType, weight, insurance, pickedUp, adress,destAddress) VALUES('','$first','$last','Normal', '$email' , '$phone','2:00pm', '$deliveryType', '$weight', '$insurance', 'No', '$address', '$address2')";
+	$sql = "INSERT INTO `pickups`(`id`, `first`, `last`, `type`, `email`, `phone`, `time`, `deliveryType`, `weight`, `insurance`, `pickedUp`, `address`, `destAddress`) VALUES ('','$first','$last','Normal','$email','$phone','2:00pm','$deliveryType','$weight','$insurance','No','$address','$address2')";
 	$query = mysqli_query($db_conx, $sql); 
 	
 }

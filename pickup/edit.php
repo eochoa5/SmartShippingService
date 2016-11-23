@@ -1,6 +1,6 @@
 <?php
 if(isset($_POST["first"])){
-	include_once("../database/connect.php");
+	include("../database/connect.php");
 	
 	$first=mysqli_real_escape_string($db_conx,$_POST["first"]);
 	$last=mysqli_real_escape_string($db_conx,$_POST["last"]);
@@ -9,17 +9,13 @@ if(isset($_POST["first"])){
 	$id=mysqli_real_escape_string($db_conx,$_POST["id"]);
 	$date=date('Y-m-d',strtotime($_POST['dt']));
 	$time=date(($_POST['tm']));
-	if(!isset($_POST["date"])){
-		$sql = "DELETE FROM `pickups` WHERE `pickups`.`shipmentId` = '$id'";
+	if(!empty($time)){
+		$sql = "UPDATE pickups SET `first`='$first', `last`='$last', `phone`='$phone', `email`='$email', `date`='$date', `time`='$time' WHERE `id`='$id' ";
 		$query = mysqli_query($db_conx, $sql);
 	}else{
-		$sql = "UPDATE pickups SET `first`='$first', `last`='$last', `phone`='$phone', `email`='$email', `date`='$date', `time`=$time WHERE `shipmentId`=$id ";
-		$query = mysqli_query($db_conx, $sql); 
+		$sql = "DELETE FROM `pickups` WHERE `pickups`.`id` = '$id'";
+		$query = mysqli_query($db_conx, $sql);
 	}
-	
-	$sql = "UPDATE pickups SET `first`='$first', `last`='$last', `phone`='$phone', `email`='$email', `date`='$date', `time`=$time WHERE `shipmentId`=$id ";
-	$query = mysqli_query($db_conx, $sql); 
-	
 }
 ?>
 
@@ -36,7 +32,7 @@ if(isset($_POST["first"])){
 <form id="editForm" name="editForm" method="post" action="edit.php">
 <div class="abc" style="margin-top:10px">Please fill out the information below</div>
  <div id="signupFormDiv">
-	<label><b>Shipment ID</b></label><br>
+	<label><b>Pickup ID to change/cancel</b></label><br>
     <input id="id" type="text" placeholder="ID" name="id" required maxlength="20" size="40"><br/>
     <label><b>First</b></label><br>
     <input id="first" type="text" placeholder="First" name="first" required maxlength="30"><br>

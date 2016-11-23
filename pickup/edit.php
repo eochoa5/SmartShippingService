@@ -12,9 +12,25 @@ if(isset($_POST["first"])){
 	if(!empty($time)){
 		$sql = "UPDATE pickups SET `first`='$first', `last`='$last', `phone`='$phone', `email`='$email', `date`='$date', `time`='$time' WHERE `id`='$id' ";
 		$query = mysqli_query($db_conx, $sql);
+		$sql2="SELECT * FROM `pickups` WHERE `id`='$id'";
+		$query2=mysqli_query($db_conx, $sql2);
+		$found= mysqli_num_rows($query2);
+		if($found){
+			echo "<script>alert('Changes have been made to pickup #$id.');</script>";
+		}else{
+			echo "<script>alert('Error. Please try again.');</script>";
+		}
 	}else{
 		$sql = "DELETE FROM `pickups` WHERE `pickups`.`id` = '$id'";
 		$query = mysqli_query($db_conx, $sql);
+		$sql2="SELECT * FROM `pickups` WHERE `id`='$id'";
+		$query2=mysqli_query($db_conx, $sql2);
+		$found= mysqli_num_rows($query2);
+		if(!$found){
+			echo "<script>alert('Pickup #$id has been deleted.');</script>";
+		}else{
+			echo "<script>alert('Error. Please try again.');</script>";
+		}
 	}
 }
 ?>

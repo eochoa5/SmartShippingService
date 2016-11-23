@@ -22,6 +22,15 @@ if(isset($_POST["first"])){
 	VALUES ('', '$first','$last', 'Normal', '$email','$date', '$phone','$time','$insurance','No','$address, $country, $state, $zip', '$address2, $country2, $state2, $zip2')";
 	$query = mysqli_query($db_conx, $sql); 
 	
+	$sql2="SELECT * FROM `pickups` WHERE `first`='$first' AND `originAddress`='$address, $country, $state, $zip'";
+	$query2=mysqli_query($db_conx, $sql2);
+	$found= mysqli_num_rows($query2);
+	if($found){
+		echo "<script>alert('A pickup has been created.');</script>";
+	}
+	else{
+		echo "<script>alert('Error while creating pickup, please try again.');</script>";	
+	} 
 }
 ?>
 

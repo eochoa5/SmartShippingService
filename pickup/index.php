@@ -1,3 +1,40 @@
+<?php
+if(isset($_POST["first"])){
+	include_once("../database/connect.php");
+	
+	$first=mysqli_real_escape_string($db_conx,$_POST["first"]);
+	$last=mysqli_real_escape_string($db_conx,$_POST["last"]);
+	$email=mysqli_real_escape_string($db_conx,$_POST["email"]);
+	$date=date('Y-m-d',strtotime($_POST['dt']));
+	$time=date(($_POST['tm']));
+	$phone=mysqli_real_escape_string($db_conx,$_POST["phone"]);
+	$insurance=mysqli_real_escape_string($db_conx,$_POST["insurance"]);
+	$address=mysqli_real_escape_string($db_conx,$_POST["address"]);
+	$state=mysqli_real_escape_string($db_conx,$_POST["state"]);
+	$zip=mysqli_real_escape_string($db_conx,$_POST["zip"]);
+	$country=mysqli_real_escape_string($db_conx,$_POST["country"]);
+	$address2=mysqli_real_escape_string($db_conx,$_POST["address2"]);
+	$state2=mysqli_real_escape_string($db_conx,$_POST["state2"]);
+	$zip2=mysqli_real_escape_string($db_conx,$_POST["zip2"]);
+	$country2=mysqli_real_escape_string($db_conx,$_POST["country2"]);
+	
+	$sql = "INSERT INTO `pickups`(`id`, `first`, `last`, `type`, `email`,`date`, `phone`, `time`, `insurance`, `pickedUp`, `originAddress`, `destAddress`) 
+	VALUES ('', '$first','$last', 'Normal', '$email','$date', '$phone','$time','$insurance','No','$address, $country, $state, $zip', '$address2, $country2, $state2, $zip2')";
+	$query = mysqli_query($db_conx, $sql); 
+	
+	$sql2="SELECT * FROM `pickups` WHERE `first`='$first' AND `originAddress`='$address, $country, $state, $zip'";
+	$query2=mysqli_query($db_conx, $sql2);
+	$found= mysqli_num_rows($query2);
+	if($found){
+		echo "<script>alert('A pickup has been created.');</script>";
+	}
+	else{
+		echo "<script>alert('Error while creating pickup, please try again.');</script>";	
+	} 
+}
+?>
+
+
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +45,7 @@
 	</head>
 <body>
 <?php include_once("../page_top.php"); ?>
-<form id="signupForm" name="signupform" onsubmit="return false;">
+<form id="pickUpForm" name="normalPickupForm" method="post" action="index.php">
 <div class="abc" style="margin-top:10px">Please fill out the information below</div>
  <div id="signupFormDiv">
  <label><b>First</b></label><br>
@@ -23,39 +60,28 @@
 	<input type="time" name="tm"><br/>
 	<label><b>Phone Number</b></label><br>
     <input id="phone" type="text" placeholder="Phone Number" name="phone" required maxlength="15"><br>
-    <label><b>Choose delivery option</b></label><br>
-    <select>
-  <option value="7 day ground economy shipping">7 day ground economy shipping</option>
-  <option value="Next day air expedited shipping">Next day air expedited shipping</option>
-  <option value="2 day air expedited shipping">2 day air expedited shipping</option>
-  <option value="4 day ground shipping">4 day ground shipping</option>
-  <option value="International air economy shipping">International air economy shipping</option>
-  <option value="International air expedited 2 day shipping">International air expedited 2 day shipping</option>
-  <option value="International air 4 day shipping">International air 4 day shipping</option>
-</select><br>
-    <label><b>Your Address/store address</b></label><br>
+    <label><b>Your Address</b></label><br>
     <input id="address" type="text" placeholder="Street Address" name="address" required maxlength="120" size="40">
 	<select name="country" id="country">
-      <?php include_once("../country_list.php"); ?>
-    </select>
-	 <input id="state" type="text" placeholder="State" name="state" required maxlength="4">
-	  <input id="zip" type="text" placeholder="Zip code" name="zip" required maxlength="9">
-	<br>
-	<label><b>Destination Address</b></label><br>
-    <input id="address2" type="text" placeholder="Street Address" name="address" required maxlength="120" size="40">
-	<select name="country" id="country2">
       <?php include("../country_list.php"); ?>
     </select>
-	 <input id="state2" type="text" placeholder="State" name="state" required maxlength="4">
-	  <input id="zip2" type="text" placeholder="Zip code" name="zip" required maxlength="9">
-	<br>
-	<label><b>Shipment weight </b></label><br>
-    <input id="weight" type="text" placeholder="Weight" name="weight" required maxlength="20"><br>
+	<input id="state" type="text" placeholder="State" name="state" required maxlength="4">
+	  <input id="zip" type="text" placeholder="Zip code" name="zip" required maxlength="9"><br>
+	<label><b>Destination Address</b></label><br>
+    <input id="address" type="text" placeholder="Street Address" name="address2" required maxlength="120" size="40">
+	<select name="country2" id="country">
+      <?php include("../country_list.php"); ?>
+    </select>
+	 <input id="state" type="text" placeholder="State" name="state2" required maxlength="4">
+	  <input id="zip" type="text" placeholder="Zip code" name="zip2" required maxlength="9"><br>
 	<label><b>Insurance</b></label><br>
-     <input type="radio" name="insurance" value="yes"> Yes
-  <input type="radio" name="insurance" value="no"> No<br>
+	<select name="insurance" id="insurance">
+	<option value="yes">Yes</option>
+	<option value="no">No</option>
+	</select><br>
+    
         
-    <button style="margin-top: 13px" id="signupbtn" onclick="">Schedule pick up</button><br><br>
+    <button style="margin-top: 13px" id="signupbtn" onclick="">Schedule pick up</button><br>
 </div>
   
 </form>

@@ -11,8 +11,9 @@
 <?php include_once("../page_top.php"); ?>
 <div id="formDiv">
     <form id="signupForm" name="signupform" onsubmit="index.php">
+	<div class="abc" style="margin-top:10px">Please fill out the information below to get an estimate.</div>
         <div id="signupFormDiv">
-            <div class="abc" style="margin-top:10px">Please fill out the information below to get an estimate.</div>
+            
             <label><b>Origin Zip Code:</b></label><br>
             <input id="org" type="text" placeholder="Zip Code" name="origin" required maxlength="30"><br>
 

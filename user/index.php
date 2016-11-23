@@ -39,7 +39,7 @@ if(!isset($_SESSION['name']) && !isset($_SESSION['pass'])){
 }
 
 #menuContainer  li a.active {
-    background-color: #02CDA2;
+    background-color: #212e3f;
     color: white;
 }
 
@@ -52,7 +52,7 @@ if(!isset($_SESSION['name']) && !isset($_SESSION['pass'])){
 <body>
 <?php include_once("../page_top.php"); ?>
 <div id="userMiddle">
-<b><span style="margin-left:60px; color:white; margin-top:10px; position:absolute;"><?php echo $_SESSION['name'];?></span></b>
+<b><span style="margin-left:60px; color:black; margin-top:10px; position:absolute;"><?php echo $_SESSION['name'];?></span></b>
 <img src="images/user.png"/ id="userImg">
 <div id="menuContainer">
 <ul>

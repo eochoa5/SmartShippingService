@@ -1,5 +1,5 @@
 html{
-	background-color: #0E5C74;
+	background-color:#efefee;
 	height:100%;
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
@@ -11,7 +11,7 @@ body{position: relative;
 	color: white;
 	border: 2px solid white;
 	border-radius:50%;
-	background-color: black;
+	background-color: #212e3f;
 	display:inline-block;
 	margin-top:-2px;
 	text-shadow: 1px 1px blue;
@@ -22,7 +22,7 @@ body{position: relative;
 footer{position:absolute;
 		bottom:0;
 		width:100%;
-		background-color:#1C456E;
+		background-color:#212e3f;
 		height: 30px;
 		color:white;
 		text-align:center;
@@ -38,7 +38,7 @@ footer{position:absolute;
 	margin-top: 50px;
 	line-height: 30px;
 	color:white;
-	background-color:#1C456E;
+	background-color:#212e3f;
 	border:1px solid rgba(255,255,255,0.2);
 	border-radius:4px;
 	height:350px;
@@ -57,7 +57,7 @@ a{color:white;
 	text-align:center;
 	font-weight:bold;
 }
-#signupFormDiv{color:white;
+#signupFormDiv{color:black;
 margin-top:10px;
 margin-left:15%;
 line-height: 35px;
@@ -71,8 +71,8 @@ margin-top: 35px;
 }
 #userMiddle{margin-top:5px;
 border:1px solid rgba(255,255,255,0.2);
-background-color:#1C456E;
-height:100%;	
+background-color:#edf9fc;
+height:100%;
 
 }
 #menuContainer{position:absolute;

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 28, 2016 at 06:26 AM
+-- Generation Time: Nov 23, 2016 at 11:31 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -51,20 +51,27 @@ INSERT INTO `notifications` (`id`, `first`, `last`, `email`, `shipmentID`, `noti
 
 CREATE TABLE `pickups` (
   `id` int(11) NOT NULL,
-  `pickupID` varchar(50) NOT NULL,
   `first` varchar(30) NOT NULL,
   `last` varchar(30) NOT NULL,
   `type` varchar(10) NOT NULL,
   `email` varchar(50) NOT NULL,
+  `date` date NOT NULL,
   `phone` varchar(15) NOT NULL,
-  `time` varchar(30) NOT NULL,
-  `deliveryType` varchar(100) NOT NULL,
-  `weight` varchar(30) NOT NULL,
+  `time` time NOT NULL,
   `insurance` varchar(3) NOT NULL,
   `pickedUp` varchar(3) NOT NULL,
-  `address` varchar(120) NOT NULL,
-  `destAddress` varchar(120) NOT NULL
+  `originAddress` varchar(120) NOT NULL,
+  `destAddress` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pickups`
+--
+
+INSERT INTO `pickups` (`id`, `first`, `last`, `type`, `email`, `date`, `phone`, `time`, `insurance`, `pickedUp`, `originAddress`, `destAddress`) VALUES
+(9, 'Edwin', 'Ochoa', 'Normal', 'e@o.com', '2016-11-30', '1234567890', '11:11:00', 'yes', 'No', 'My address, CA, 12345', 'Your address, CA, 12345'),
+(10, 'goku', 'lol', 'Normal', 'a@a', '2016-11-03', '3237528', '02:01:00', 'yes', 'No', '6219 S lol, CA, 90047', 'dfhhfhufdf, CA, 9058'),
+(12, 'Edwin', 'Ochoa', 'Normal', 'a@agt', '2016-11-14', '32376547', '01:59:00', 'no', 'No', '6219 S hfhg, United States of America, CA, 90047', 'frtyh, Bahamas, fr, 8549');
 
 -- --------------------------------------------------------
 
@@ -114,7 +121,7 @@ CREATE TABLE `shipments` (
 --
 
 INSERT INTO `shipments` (`id`, `shipmentID`, `first`, `last`, `email`, `phone`, `deliveryType`, `weight`, `insurance`, `delivered`, `delay`, `address`, `destAddress`, `shipDate`, `deliveryDate`, `curLoc`, `summary`) VALUES
-(1, 'test123', 'edwin', 'ochoa', 'edwin@gmail.com', '3231234567', '4 day ground shipping', '420 lbs', 'no', 'YES', 0, '5154 State University Dr, Los Angeles, CA 90032', 'Harvard University, Cambridge, MA 02138', '2016-10-23', '2016-10-24 07:00:00', 'Missouri', 'Contents: Nike Shoes total: 25 USD'),
+(1, 'test123', 'edwin', 'ochoa', 'edwin@gmail.com', '3231234567', '4 day ground shipping', '420 lbs', 'no', 'YES', 0, '5154 State University Dr, Los Angeles, CA 90032', 'Harvard University, Cambridge, MA 02138', '2016-10-23', '2016-10-24 07:00:00', 'Denver', 'Contents: Nike Shoes total: 25 USD'),
 (2, 'test5', 'donald', 'trump', 'donald@gmail.com', '911', '4 day ground shipping', '69', 'no', 'YES', 2, 'CSULA', 'Mexico city', '2016-10-25', '0000-00-00 00:00:00', 'Las vegas', 'contents: sweatpants. total: 30 USD');
 
 -- --------------------------------------------------------
@@ -133,6 +140,15 @@ CREATE TABLE `tickets` (
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `status` varchar(6) NOT NULL DEFAULT 'open'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tickets`
+--
+
+INSERT INTO `tickets` (`id`, `first`, `last`, `email`, `shipmentID`, `description`, `date`, `status`) VALUES
+(1, 'Ariel', 'Suarez', 'a@suarez.com', '12', 'Test', '0000-00-00 00:00:00', ''),
+(2, 'Edwin', 'Ochoa', 'e@ochoa.com', '4', 'Test 2', '2016-11-23 04:44:03', 'open'),
+(7, 'Edwin', 'Ochoa', 'a@a', 'test123', 'hello world', '2016-11-23 22:18:20', 'open');
 
 -- --------------------------------------------------------
 
@@ -173,8 +189,7 @@ ALTER TABLE `notifications`
 -- Indexes for table `pickups`
 --
 ALTER TABLE `pickups`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `pickupID` (`pickupID`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `retailers`
@@ -212,12 +227,12 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `pickups`
 --
 ALTER TABLE `pickups`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `retailers`
 --
@@ -232,7 +247,7 @@ ALTER TABLE `shipments`
 -- AUTO_INCREMENT for table `tickets`
 --
 ALTER TABLE `tickets`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `users`
 --

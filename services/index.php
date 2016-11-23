@@ -8,7 +8,7 @@
 	</head>
 <body>
 <?php include_once("../page_top.php"); ?>
-<div id="myContainer" style="margin-top:40px; margin-left:40px; color:white;">
+<div id="myContainer" style="margin-top:40px; margin-left:40px; color:black;">
 We offer the following shipping options: <br/>
 	<ul>
 	<b><u>National</u></b><br/>

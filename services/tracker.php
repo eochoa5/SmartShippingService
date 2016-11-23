@@ -47,6 +47,10 @@ if(isset($_POST["shipid"])){
 		if($_SESSION['percentage']==100 || $_SESSION['remaining']==0){
 			$sql = "UPDATE shipments SET delivered='YES' WHERE shipmentID='$shipid'";
 			$query = mysqli_query($db_conx, $sql);
+			$destination1 =  $_SESSION['dest1'];
+			
+			$sql1 = "UPDATE shipments SET curLoc='$destination1' WHERE shipmentID='$shipid'";
+			$query1 = mysqli_query($db_conx, $sql1);
 		
 		}
 		 
@@ -80,7 +84,7 @@ if(!isset($_SESSION['address1']) && !isset($_SESSION['summary'])){
 		
 <style>	
 
-table, th, td {color:white;
+table, th, td {color:black;
     border: 1px solid black;
     border-collapse: collapse;
 }
@@ -120,7 +124,7 @@ th, td {
 		#status{margin-left:50%;
 			position:absolute;
 			font-weight:bold;
-			color:white;
+		
 			margin-top: 80px;
 			font-size:20px;
 		}
@@ -128,13 +132,13 @@ th, td {
 		#shipDT{position:absolute;
 		margin-left:33%;
 		margin-top:230px;
-		color:white;
+		
 			
 		}
 		#arrivalDT{position:absolute;
 		margin-left:80%;
 		margin-top:230px;
-		color:white;
+		
 			
 		}
 		

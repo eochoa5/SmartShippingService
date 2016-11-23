@@ -22,7 +22,7 @@ if(isset($_SESSION['name']) && isset($_SESSION['pass'])){
 <body>
 <?php include_once("page_top.php"); ?>
 <br/>
- <div id="sliderFrame">
+ <div id="sliderFrame" style="margin-top:50px">
         <div id="slider">
           
             <img src="images/img0.png" alt="" />

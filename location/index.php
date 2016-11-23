@@ -99,7 +99,7 @@ if(isset($_POST["zip"])){
   
 </form>
 
-<div id="locationsContainer" <?php if (!$processed){echo 'style="display:none;"';} ?> style="color:white; height:800px;">
+<div id="locationsContainer" <?php if (!$processed){echo 'style="display:none;"';} ?> style="color:black; height:800px;">
 <?php $input= $_POST["address"]. ", " . $_POST["country"] . ", " .  $_POST["state"] . ", " . $_POST["zip"]; ?>
 <div class="abc" style="margin-top:10px">Here are our nearest locations to <?php echo $input; ?></div><br>
 <?php

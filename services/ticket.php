@@ -8,9 +8,19 @@ if(isset($_POST["first"])){
 	$id =mysqli_real_escape_string($db_conx,$_POST["shipid"]);
 	$desc=mysqli_real_escape_string($db_conx,$_POST["desc"]);
 	
-	$sql = "INSERT INTO `tickets`(`id`, `first`, `last`, `email`, `shipmentID`, `description`, `date`,`status`) 
-	VALUES ('', '$first', '$last','$email', $id, '$desc',CURRENT_TIMESTAMP,'open')";
-	$query = mysqli_query($db_conx, $sql); 
+	$sql1 = "SELECT * FROM shipments WHERE shipmentID='$id'";
+	$query1 = mysqli_query($db_conx, $sql1);
+	$found= mysqli_num_rows($query1);	
+	
+	if($found){
+		$sql = "INSERT INTO `tickets`(`id`, `first`, `last`, `email`, `shipmentID`, `description`, `date`,`status`) 
+		VALUES ('', '$first', '$last','$email', '$id', '$desc',CURRENT_TIMESTAMP,'open')";
+		$query = mysqli_query($db_conx, $sql); 	
+		echo "<script>alert('A ticket has been created.');</script>";
+	}
+	else{
+		echo "<script>alert('That shipment ID does not exist!');</script>";	
+	} 
 	
 }
 ?>

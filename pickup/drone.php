@@ -12,12 +12,14 @@ if(isset($_POST["first"])){
 	$address=mysqli_real_escape_string($db_conx,$_POST["address"]);
 	$state=mysqli_real_escape_string($db_conx,$_POST["state"]);
 	$zip=mysqli_real_escape_string($db_conx,$_POST["zip"]);
+	$country=mysqli_real_escape_string($db_conx,$_POST["country"]);
 	$address2=mysqli_real_escape_string($db_conx,$_POST["address2"]);
 	$state2=mysqli_real_escape_string($db_conx,$_POST["state2"]);
 	$zip2=mysqli_real_escape_string($db_conx,$_POST["zip2"]);
+	$country2=mysqli_real_escape_string($db_conx,$_POST["country2"]);
 	
 	$sql = "INSERT INTO `pickups`(`id`, `first`, `last`, `type`, `email`,`date`, `phone`, `time`, `insurance`, `pickedUp`, `originAddress`, `destAddress`) 
-	VALUES ('', '$first','$last', 'Drone', '$email','$date', '$phone','$time','$insurance','No','$address, $state, $zip', '$address2, $state2, $zip2')";
+	VALUES ('', '$first','$last', 'Drone', '$email','$date', '$phone','$time','$insurance','No','$address, $country, $state, $zip', '$address2, $country2, $state2, $zip2')";
 	$query = mysqli_query($db_conx, $sql); 
 	
 }

@@ -1,2 +1,2 @@
 
-<footer>&copy; Copyright 2016, Our Shipping Company LLC</footer>
+<footer>&copy; Copyright 2016, Smart Shipping Service LLC</footer>
